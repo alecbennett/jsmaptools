@@ -14,7 +14,7 @@
       /**
        * Called on the initial page load.
        */
-	function init(fs) {
+	function init() {
 		map = new google.maps.Map(document.getElementById('map_canvas'), {
 			'zoom': 4,
 			'center': new google.maps.LatLng(63.5, -147),
