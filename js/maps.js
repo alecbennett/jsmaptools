@@ -1,8 +1,6 @@
 
       // Global variables
 	var map;
-	var marker1;
-	var marker2;
 	var rectangle;
 	var polygon;
 	var polyline;
@@ -44,11 +42,11 @@
       
 	function dragRectangle() {
 		var latLngBounds = new google.maps.LatLngBounds(
-		  marker1.getPosition(),
-		  marker2.getPosition()
+		  marker_list[0].getPosition(),
+		  marker_list[1].getPosition()
 		);
 		rectangle.setBounds(latLngBounds);
-		document.getElementById(pointLayer).innerHTML = "Marker1: " + marker1.getPosition() + "<br/>Marker2: " + marker2.getPosition();
+		document.getElementById(pointLayer).innerHTML = "Marker1: " + marker_list[0].getPosition() + "<br/>Marker2: " + marker_list[1].getPosition();
 	}
 
 	function placeMarker(location) {
@@ -112,7 +110,7 @@
 		document.getElementById(pointLayer).innerHTML = coordinate_list;
 	}
 	function drawPoly(){
-		if (marker1 || marker2 || rectangle){
+		if (rectangle){
 			hideRectangle();
 		}
 		if (poly_listener){
@@ -150,8 +148,8 @@
 		
 	}
 	function hideRectangle(){
-		marker1.setMap(null);
-		marker2.setMap(null);
+		marker_list[0].setMap(null);
+		marker_list[1].setMap(null);
 		rectangle.setMap(null);
 		document.getElementById(pointLayer).innerHTML = "";
 	}
@@ -159,24 +157,24 @@
 		if (polygon || polyline){
 			hidePoly();
 		}
-		if (marker1 || marker2 || rectangle){
+		if (rectangle){
 			hideRectangle();
 		}	
-		marker1 = new google.maps.Marker({
+		marker_list[0] = new google.maps.Marker({
 		  map: map,
 		  position: new google.maps.LatLng(72, -170),
 		  draggable: true,
 		  icon: "http://maps.google.com/mapfiles/ms/icons/blue.png"
 		});
-		marker2 = new google.maps.Marker({
+		marker_list[1] = new google.maps.Marker({
 		  map: map,
 		  position: new google.maps.LatLng(53, -140),
 		  draggable: true,
 		  icon: "http://maps.google.com/mapfiles/ms/icons/blue.png"
 		});
 		
-		google.maps.event.addListener(marker1, 'drag', dragRectangle);
-		google.maps.event.addListener(marker2, 'drag', dragRectangle);
+		google.maps.event.addListener(marker_list[0], 'drag', dragRectangle);
+		google.maps.event.addListener(marker_list[1], 'drag', dragRectangle);
 		rectangle = new google.maps.Rectangle({
 		  map: map,
 		  fillColor: "#0000ff",
@@ -186,8 +184,8 @@
 		});
 
 		var latLngBounds = new google.maps.LatLngBounds(
-		  marker1.getPosition(),
-		  marker2.getPosition()
+		  marker_list[0].getPosition(),
+		  marker_list[1].getPosition()
 		);
 		rectangle.setBounds(latLngBounds);
 	}
