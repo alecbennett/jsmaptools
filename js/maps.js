@@ -39,6 +39,9 @@
 
 		}
 	}
+	/*
+ 	* Functions relating to Polygon manipulation
+ 	*/
 	function hidePoly(){
 		if (poly_listener){
 	                google.maps.event.removeListener(poly_listener);
@@ -131,6 +134,9 @@
 		polygon.setPaths(point_list);
 		polyline.setMap(null);
 	}
+	/*
+ 	* Functions relating to Rectangle manipulation
+ 	*/
 	function hideRectangle(){
 		if (marker_list[0] && marker_list[1]){
 			marker_list[0].setMap(null);
