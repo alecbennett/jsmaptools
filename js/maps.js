@@ -148,8 +148,10 @@
 		
 	}
 	function hideRectangle(){
-		marker_list[0].setMap(null);
-		marker_list[1].setMap(null);
+		if (marker_list[0] && marker_list[1]){
+			marker_list[0].setMap(null);
+			marker_list[1].setMap(null);
+		}
 		rectangle.setMap(null);
 		document.getElementById(pointLayer).innerHTML = "";
 	}
