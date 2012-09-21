@@ -9,7 +9,6 @@
 	var point_list = new google.maps.MVCArray();
 	var marker_list = [];
 	var poly_listener;
-	var fullscreen = false;
 	var pointLayer = "";
       /**
        * Called on the initial page load.
@@ -43,11 +42,10 @@
 		}
       }
       
-	function redraw() {
+	function dragRectangle() {
 		var latLngBounds = new google.maps.LatLngBounds(
 		  marker1.getPosition(),
 		  marker2.getPosition()
-
 		);
 		rectangle.setBounds(latLngBounds);
 		document.getElementById(pointLayer).innerHTML = "Marker1: " + marker1.getPosition() + "<br/>Marker2: " + marker2.getPosition();
@@ -177,8 +175,8 @@
 		  icon: "http://maps.google.com/mapfiles/ms/icons/blue.png"
 		});
 		
-		google.maps.event.addListener(marker1, 'drag', redraw);
-		google.maps.event.addListener(marker2, 'drag', redraw);
+		google.maps.event.addListener(marker1, 'drag', dragRectangle);
+		google.maps.event.addListener(marker2, 'drag', dragRectangle);
 		rectangle = new google.maps.Rectangle({
 		  map: map,
 		  fillColor: "#0000ff",
@@ -186,7 +184,12 @@
 		  strokeColor: "#0000ff",
 		  strokeWeight: "3"
 		});
-		redraw();
+
+		var latLngBounds = new google.maps.LatLngBounds(
+		  marker1.getPosition(),
+		  marker2.getPosition()
+		);
+		rectangle.setBounds(latLngBounds);
 	}
 	function setPointLayer(layername){
 		pointLayer = layername;
