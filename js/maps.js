@@ -27,17 +27,6 @@
 			},
 			'mapTypeId': google.maps.MapTypeId.ROADMAP
 		});
-		if (point_list){
-			polygon = new google.maps.Polygon({
-				map: map,
-				fillColor: "#333333",
-				fillOpacity: "0.2",
-				strokeColor: "#333333",
-				strokeWeight: "4"
-			});
-			polygon.setPaths(point_list);
-
-		}
 	}
 	/*
  	* Functions relating to Polygon manipulation
