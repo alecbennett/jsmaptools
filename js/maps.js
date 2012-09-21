@@ -96,9 +96,9 @@
 		}
 		document.getElementById(pointLayer).innerHTML = "";
 	}
-	function dragPolyMarker(x){
-		var pIndex = x.getTitle().substring(1);
-		point_list[pIndex] = x.getPosition();
+	function dragPolyMarker(m){
+		var pIndex = m.getTitle().substring(1);
+		point_list[pIndex] = m.getPosition();
 		polygon.setPaths(point_list);
 		updatePointList();
 	}
