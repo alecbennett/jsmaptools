@@ -46,7 +46,7 @@
 		  marker_list[1].getPosition()
 		);
 		rectangle.setBounds(latLngBounds);
-		document.getElementById(pointLayer).innerHTML = "Marker1: " + marker_list[0].getPosition() + "<br/>Marker2: " + marker_list[1].getPosition();
+		updatePointList();
 	}
 
 	function placeMarker(location) {
@@ -104,8 +104,8 @@
 	}
 	function updatePointList(){
 		var coordinate_list = "";
-		for (var i = 0; i < point_list.length; i++){
-			coordinate_list += "Point " + (i + 1) + ": " + point_list[i] + "<br />";
+		for (var i = 0; i < marker_list.length; i++){
+			coordinate_list += "Point " + (i + 1) + ": " + marker_list[i].getPosition() + "<br />";
 		}
 		document.getElementById(pointLayer).innerHTML = coordinate_list;
 	}
@@ -160,6 +160,7 @@
 		if (rectangle){
 			hideRectangle();
 		}	
+		marker_list = [];
 		marker_list[0] = new google.maps.Marker({
 		  map: map,
 		  position: new google.maps.LatLng(72, -170),
@@ -188,6 +189,7 @@
 		  marker_list[1].getPosition()
 		);
 		rectangle.setBounds(latLngBounds);
+		updatePointList();
 	}
 	function setPointLayer(layername){
 		pointLayer = layername;
