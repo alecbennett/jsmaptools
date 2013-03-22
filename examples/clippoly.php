@@ -60,8 +60,8 @@
 		</div>
 	</body>
 					<script type="text/javascript">
-						$("#drawPoly").click( function(){ drawPolygon(); });
-						$("#drawRectangle").click( function(){ drawRectangle(); });
+						$("#drawPoly").click( function(){ drawPolygon(); $('#downloadLink').hide(); });
+						$("#drawRectangle").click( function(){ drawRectangle(); $('#downloadLink').hide(); });
 						$("#postPoly").click( function(){ sendData(); });
 					</script>
 </html>
