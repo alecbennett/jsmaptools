@@ -46,13 +46,14 @@
 
 				<div id="map_wrapper" style="position: relative;">
 					<div id="map_canvas" style="margin: auto; width: 1000px; height: 600px; position: relative;"></div>
-					<div id="pointDisplay"></div>
+
 				</div>
 				<div id="controls" style="margin-top: 20px";>
 					<div class="mapbutton" id="drawPoly">Draw Polygon</div>
 					<div class="mapbutton" id="drawRectangle">Draw Rectangle</div>
 					<div class="mapbutton" id="postPoly" style="background-color: pink;">Save Map</div>
 				</div>
+					<div id="pointDisplay"></div>
 			</div>
 		</div>
 	</body>
