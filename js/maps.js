@@ -49,7 +49,7 @@
 		document.getElementById(pointLayer).innerHTML = "";
 	}
 
-	function drawPoly(){
+	function drawPolygon(){
 		if (rectangle){
 			hideRectangle();
 		}

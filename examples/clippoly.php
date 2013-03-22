@@ -3,6 +3,7 @@
  ?>
 <html>
 	<head>
+		<link rel="stylesheet" href="../css/style.css">
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"> </script>
 		<script  src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="../js/maps.js"></script>
@@ -42,22 +43,22 @@
 
 				</script>	
 
-				<div id="controls">
-					<input type="button" onclick="javascript:drawPoly();" value="Draw Polygon" />
-					<input type="button" onclick="javascript:drawRectangle();" value="Draw Rectangle" />
-					<input type="button" id="postPoly" />
 
-				</div>
 				<div id="map_wrapper" style="position: relative;">
-					<div id="map_canvas" style="height: 600px; position: relative;"></div>
+					<div id="map_canvas" style="margin: auto; width: 1000px; height: 600px; position: relative;"></div>
 					<div id="pointDisplay"></div>
+				</div>
+				<div id="controls" style="margin-top: 20px";>
+					<div class="mapbutton" id="drawPoly">Draw Polygon</div>
+					<div class="mapbutton" id="drawRectangle">Draw Rectangle</div>
+					<div class="mapbutton" id="postPoly" style="background-color: pink;">Save Map</div>
 				</div>
 			</div>
 		</div>
 	</body>
 					<script type="text/javascript">
-						$("#postPoly").click( function(){ 
-							sendData(); 
-						});
+						$("#drawPoly").click( function(){ drawPolygon(); });
+						$("#drawRectangle").click( function(){ drawRectangle(); });
+						$("#postPoly").click( function(){ sendData(); });
 					</script>
 </html>
