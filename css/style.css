@@ -7,14 +7,34 @@ body {
 	margin-top: 50px;
 }
 #postPoly {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff5555), color-stop(1, #990000) );
         background:-moz-linear-gradient( center top, #ff5555 5%, #990000 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5555', endColorstr='#990000');
 	color:#ffffff;
 	text-shadow:1px 1px 0px #999999;
 }
 #postPoly:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ff0000), color-stop(1, #994444) );
         background:-moz-linear-gradient( center top, #ff0000 5%, #994444 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0000', endColorstr='#994444');
+}
+#downloadLink {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5555ff), color-stop(1, #000099) );
+        background:-moz-linear-gradient( center top, #5555ff 5%, #000099 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5555ff', endColorstr='#000099');
+	color:#ffffff;
+	text-shadow:1px 1px 0px #999999;
+}
+#downloadLink:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #0000ff), color-stop(1, #444499) );
+        background:-moz-linear-gradient( center top, #0000ff 5%, #444499 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0000ff', endColorstr='#444499');
+}
+#downloadLink a {
+	text-decoration: none;
+}
+#downloadLink a:visited {
+	color:#ffffff
 }
 .mapbutton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;

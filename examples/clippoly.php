@@ -18,8 +18,6 @@
 						shapeList += ', { "Point": "' + marker_list[i].getPosition().lng() + ', ' + marker_list[i].getPosition().lat() + '" }';
 					}
 					shapeList += '] }';
-					//alert(shapeList);	
-					//var shapeList2 = $.parseJSON( shapeList ); 
 					shapeList = $.parseJSON( shapeList ); 
                		    	}
 
@@ -28,7 +26,10 @@
 					type: 'POST',
 					//data: { "People": [ {"Name": "Bob"}, {"Name": "John"} ] },
 					data: shapeList,
-					success: function(){  },
+					success: function(msg){ 
+						$('#downloadLink').html('<a href="' + msg + '">Download File</a>'); 
+						$('#downloadLink').show();
+					},
 					error: function(a,b,c){ console.log(a); console.log(b); console.log(c); }
 			    });
 			};
@@ -52,6 +53,7 @@
 					<div class="mapbutton" id="drawPoly">Draw Polygon</div>
 					<div class="mapbutton" id="drawRectangle">Draw Rectangle</div>
 					<div class="mapbutton" id="postPoly" style="background-color: pink;">Save Map</div>
+					<div class="mapbutton" style="display: none;" id="downloadLink"></div>
 				</div>
 					<div id="pointDisplay"></div>
 			</div>
