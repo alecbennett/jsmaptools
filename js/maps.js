@@ -52,7 +52,6 @@
 	function drawPolygon(){
 		if (rectangle){
 			hideRectangle();
-			rectangle = false;
 		}
 		if (poly_listener){
 	                google.maps.event.removeListener(poly_listener);
@@ -133,6 +132,7 @@
 			marker_list[1].setMap(null);
 		}
 		rectangle.setMap(null);
+		rectangle = false;
 		document.getElementById(pointLayer).innerHTML = "";
 	}
 	function drawRectangle(){
