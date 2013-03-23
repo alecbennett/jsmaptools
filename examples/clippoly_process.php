@@ -8,9 +8,9 @@
 		$mainString .= ', [ '.$_POST['Shape'][$i]['Point'].' ]';
 	}
 	$mainString .= ' ] ] }, "properties": { "prop0": "value0" } } ] }';
-	file_put_contents ( md5($_SERVER['REMOTE_ADDR']).".json" , $mainString );
+	$fileName = md5($SERVER['REMOTE_ADDR'].time());
+	file_put_contents ( "output/".$fileName.".json" , $mainString );
 	$sysout = "";
-	system("./clipwarp.sh ".md5($_SERVER['REMOTE_ADDR'])." 2&>/dev/null", $sysout);
-
-	echo md5($_SERVER['REMOTE_ADDR']).".tif";
+	system("./clipwarp.sh ".$fileName." 2&>/dev/null", $sysout);
+	echo $fileName.".tif";
 ?>

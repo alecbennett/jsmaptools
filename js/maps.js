@@ -52,6 +52,7 @@
 	function drawPolygon(){
 		if (rectangle){
 			hideRectangle();
+			rectangle = false;
 		}
 		if (poly_listener){
 	                google.maps.event.removeListener(poly_listener);

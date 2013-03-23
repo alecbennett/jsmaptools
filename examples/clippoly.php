@@ -39,7 +39,7 @@
 						type: 'POST',
 						data: shapeList,
 						success: function(msg){ 
-							$('#downloadLink').html('<a href="' + msg + '">Download File</a>'); 
+							$('#downloadLink').html('<a href="output/' + msg + '">Download File</a>'); 
 							$('#downloadLink').show();
 							$('#downloadBox').hide();
 							$('#downloadBox').html('');
