@@ -2,3 +2,12 @@ jsMapTools
 ==========
 
 jsMapTools is meant to be an extension to map building interfaces.  Initially, functions will center around common tasks such as polygon selection, rectangle selection, etc.  Advanced features may come in the future.
+
+ClipPoly
+========
+For clip Poly to work, it requires a couple setup steps:
+1. Install the GDAL libraries (1.9.1 works, 1.8.0 *may* work)
+2. Create a directory called "output" with chmod 777 in examples/
+3. Set the file in clipwarp.sh to the file you want clipped
+
+
