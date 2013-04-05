@@ -27,7 +27,7 @@
 					for (var i = 1; i < marker_list.length; i++){
 						shapeList += ', { "Point": "' + marker_list[i].getPosition().lng() + ', ' + marker_list[i].getPosition().lat() + '" }';
 					}
-					shapeList += '] }';
+					shapeList += '], "layerName": "' + layer + '" }';
 					shapeList = $.parseJSON( shapeList ); 
 					validPoints = true;
                		    	} else {
@@ -58,8 +58,29 @@
 					google.maps.event.addDomListener(window, 'load', init);
 					setPointLayer("pointDisplay");
 
-				</script>	
+					$(document).ready(function(){
+						var selectList = $("#layerSelect");
+						$.getJSON("layers.json", function(layers) {	
+							$.each(layers.layerList, function(index, optData){
+								selectList.append('<option value="' + optData.layerName + '">' + optData.layerName + '</option>');
+							});
+						});
+						$("#layerSelect").change( function(){
+							$("select option:selected").each(function () {
+								layer = $(this).text();
+								updateLayer();
+							});
 
+						});
+					});
+
+				</script>	
+				<div>
+					<div>Layer</div>
+					<div>
+						<select id="layerSelect"></select>
+					</div>
+				</div>
 
 				<div id="map_wrapper" style="position: relative; border: 1px solid black; padding: 3px;">
 					<div id="map_canvas" style="margin: auto; width: 992px; height: 600px; position: relative;"></div>
@@ -79,5 +100,8 @@
 						$("#drawPoly").click( function(){ drawPolygon(); $('#downloadLink').hide(); });
 						$("#drawRectangle").click( function(){ drawRectangle(); $('#downloadLink').hide(); });
 						$("#postPoly").click( function(){ sendData(); });
+
+
+
 					</script>
 </html>

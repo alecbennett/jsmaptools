@@ -13,6 +13,7 @@
 	$fileName = md5($SERVER['REMOTE_ADDR'].time());
 	file_put_contents ( "output/".$fileName.".json" , $mainString );
 	$sysout = "";
-	system("./clipwarp.sh ".$fileName." 2&>/dev/null", $sysout);
+	$layerName = $_POST['layerName'];
+	system("./clipwarp.sh ".$fileName." ".$layerName." 2&>/dev/null", $sysout);
 	echo $fileName.".tif";
 ?>

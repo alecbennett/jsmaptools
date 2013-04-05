@@ -1,6 +1,7 @@
 
       // Global variables
 	var map;
+	var layer;
 	var rectangle;
 	var polygon;
 	var polyline;
@@ -8,6 +9,7 @@
 	var marker_list = [];
 	var poly_listener;
 	var pointLayer = "";
+
       /**
        * Called on the initial page load.
        */
@@ -27,6 +29,35 @@
 			},
 			'mapTypeId': google.maps.MapTypeId.ROADMAP
 		});
+		updateLayer();
+      }
+      function updateLayer(){
+		var tilepath = "http://tiles.snap.uaf.edu/tilecache/tilecache.cgi/2.11.0/" + layer;
+		var defmap = new google.maps.ImageMapType({
+			getTileUrl: function(tile, zoom) {
+				return tilepath + "/" + zoom + "/" + tile.x + "/" + tile.y + ".png";
+			},
+			tileSize: new google.maps.Size(256, 256),
+			opacity: 0.75
+		});
+
+		map.overlayMapTypes.push(null); // create empty overlay entry
+		map.overlayMapTypes.setAt("0", defmap);
+		var gnames = new google.maps.ImageMapType({
+			getTileUrl: function(a, z) {
+			var tiles = 1 << z, X = (a.x % tiles);
+			if(X < 0) { X += tiles; }
+			return "http://mt0.google.com/vt/v=apt.116&hl=en-US&x=" +
+			X + "&y=" + a.y + "&z=" + z + "&s=G&lyrs=h";
+			},
+			tileSize: new google.maps.Size(256, 256),
+			isPng: false,
+			maxZoom: 20,
+			name: "lyrs=h",
+			alt: "Hybrid labels"
+			});
+		map.overlayMapTypes.push(null); // create empty overlay entry
+		map.overlayMapTypes.setAt("1",gnames );
 	}
 	/*
  	* Functions relating to Polygon manipulation
