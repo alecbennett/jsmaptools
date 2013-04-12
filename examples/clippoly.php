@@ -13,21 +13,21 @@
 			function sendData() {
 				var validPoints = false;
 				if (rectangle){
-					var shapeList = '{ "Shape": [';
-					shapeList += ' { "Point": "' + marker_list[0].getPosition().lng() + ', ' + marker_list[0].getPosition().lat() +  '" },';
-					shapeList += ' { "Point": "' + marker_list[0].getPosition().lng() + ', ' + marker_list[1].getPosition().lat() +  '" },';
-					shapeList += ' { "Point": "' + marker_list[1].getPosition().lng() + ', ' + marker_list[1].getPosition().lat() +  '" },';
-					shapeList += ' { "Point": "' + marker_list[1].getPosition().lng() + ', ' + marker_list[0].getPosition().lat() +  '" }';
-					shapeList += '] }';
+					var shapeList = '{"Shape":[';
+					shapeList += '{"Point":"' + marker_list[0].getPosition().lng() + ',' + marker_list[0].getPosition().lat() +  '"},';
+					shapeList += '{"Point":"' + marker_list[0].getPosition().lng() + ',' + marker_list[1].getPosition().lat() +  '"},';
+					shapeList += '{"Point":"' + marker_list[1].getPosition().lng() + ',' + marker_list[1].getPosition().lat() +  '"},';
+					shapeList += '{"Point":"' + marker_list[1].getPosition().lng() + ',' + marker_list[0].getPosition().lat() +  '"}';
+					shapeList += ']}';
 					shapeList = $.parseJSON( shapeList ); 
 					validPoints = true;
 				} else if(polygon && marker_list.length >= 3){
-					var shapeList = '{ "Shape": [';
-					shapeList += ' { "Point": "' + marker_list[0].getPosition().lng() + ', ' + marker_list[0].getPosition().lat() +  '" }';
+					var shapeList = '{"Shape":[';
+					shapeList += '{"Point":"' + marker_list[0].getPosition().lng() + ',' + marker_list[0].getPosition().lat() +  '"}';
 					for (var i = 1; i < marker_list.length; i++){
-						shapeList += ', { "Point": "' + marker_list[i].getPosition().lng() + ', ' + marker_list[i].getPosition().lat() + '" }';
+						shapeList += ',{"Point":"' + marker_list[i].getPosition().lng() + ',' + marker_list[i].getPosition().lat() + '"}';
 					}
-					shapeList += '], "layerName": "' + layer + '" }';
+					shapeList += '],"layerName":"' + layer + '"}';
 					shapeList = $.parseJSON( shapeList ); 
 					validPoints = true;
                		    	} else {

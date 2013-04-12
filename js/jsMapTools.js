@@ -215,7 +215,7 @@
 	function updatePointList(){
 		var coordinate_list = "";
 		for (var i = 0; i < marker_list.length; i++){
-			coordinate_list += "P" + (i + 1) + ": " + marker_list[i].getPosition() + "<br />";
+			coordinate_list += "P" + (i + 1) + ": " + marker_list[i].getPosition() + "\n";
 		}
 		document.getElementById(pointLayer).innerHTML = coordinate_list;
 	}
