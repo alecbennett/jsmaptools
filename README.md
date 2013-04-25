@@ -12,4 +12,4 @@ mt.readGeoJSON("my.json");
 
 Demos & Projects:
 =================
-Check out [url]http://www.alecbennett.com/projects/[/url] for demos using jsmaptools.
+Check out http://www.alecbennett.com/projects/ for demos using jsmaptools.
