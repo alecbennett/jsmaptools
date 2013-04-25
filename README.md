@@ -9,3 +9,7 @@ How To:
 Polygon Loading:
 var mt = new MapTools(map);
 mt.readGeoJSON("my.json");
+
+Demos & Projects:
+=================
+Check out [url]http://www.alecbennett.com/projects/[/url] for demos using jsmaptools.
