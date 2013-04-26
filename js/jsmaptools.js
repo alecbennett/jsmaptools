@@ -37,9 +37,9 @@ MultiPolygon.prototype = {
 		this.polyArray.push(poly);
 	},
 	signalPolygons: function signalPolygons(signal){
-		for (var i = 0; i < this.polyArray.length; i++){
+		$.each(this.polyArray, function(i, v){
 			signal(i);
-		}
+		});
 	},
 	initialize: function initialize(that=this){
 		for (var i = 0; i < this.polyArray.length; i++){
