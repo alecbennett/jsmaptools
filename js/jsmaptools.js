@@ -41,7 +41,8 @@ MultiPolygon.prototype = {
 			signal(i);
 		});
 	},
-	initialize: function initialize(that=this){
+	initialize: function initialize(){
+		var that=this;
 		for (var i = 0; i < this.polyArray.length; i++){
 			this.polyArray[i].initialize();
 		}
@@ -67,7 +68,8 @@ MapTools.prototype = {
 	closePolygon: function closePolygon(){
 
         },
-	readGeoJSON: function readGeoJSON(fileName, that=this){
+	readGeoJSON: function readGeoJSON(fileName){
+		var that=this;
 		$.ajax({
   		url: fileName,
   		dataType: 'json',
