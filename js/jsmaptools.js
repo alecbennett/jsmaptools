@@ -4,7 +4,8 @@ var Polygon = function Polygon(pL){
 	this.gMap = new google.maps.Polygon({
 		map: parent.map,
 		strokeWeight: "1.0",
-		fillColor: "#222222"
+		fillColor: "#222222",
+		fillOpacity: 0.4
 	});
 	this.gMap.setPaths(this.pointList);
 	this.gMap.setMap(parent.map);
@@ -16,7 +17,7 @@ Polygon.prototype = {
 	},
 	initialize: function initialize(){
 		google.maps.event.addListener(this.gMap,"mouseover",function(){
-			this.setOptions({fillColor: "#cccccc"});
+			this.setOptions({fillColor: "#999999"});
 		});
 		google.maps.event.addListener(this.gMap,"mouseout",function(){
 			this.setOptions({fillColor: "#222222"});
@@ -27,9 +28,17 @@ Polygon.prototype = {
 		return this.name;
 	},
 }
-var MultiPolygon = function MultiPolygon(){
+var MultiPolygon = function MultiPolygon(pA){
+	this.pointArray = pA;
 	this.type = "MultiPolygon";
-	this.polyArray = new Array();
+	this.gMap = new google.maps.Polygon({
+		map: parent.map,
+		strokeWeight: "1.0",
+		fillColor: "#222222",
+		fillOpacity: 0.4
+	});
+	this.gMap.setPaths(this.pointArray);
+	this.gMap.setMap(parent.map);
 }
 MultiPolygon.prototype = {
 	addPolygon: function addPolygon(points){
@@ -43,9 +52,6 @@ MultiPolygon.prototype = {
 	},
 	initialize: function initialize(){
 		var that=this;
-		for (var i = 0; i < this.polyArray.length; i++){
-			this.polyArray[i].initialize();
-		}
 	}
 }
 var MapTools = function MapTools(mn) {
@@ -55,12 +61,13 @@ var MapTools = function MapTools(mn) {
 MapTools.prototype = {
 	addPolygon: function addPolygon(points){
 		var poly = new Polygon(points);
-		poly.initPolygon();
+		poly.initialize();
 		this.features.push(poly);
-	
 	},
-	addMultiPolygon: function addMultiPolygon(){
-
+	addMultiPolygon: function addMultiPolygon(pointArray){
+		var mpoly = new MultiPolygon(pointArray);
+		mpoly.initialize();
+		this.features.push(mpoly);
 	},
 	startPolygon: function startPolygon(){
 
@@ -86,16 +93,16 @@ MapTools.prototype = {
 						that.addPolygon(cL);
 					}
 					if (fT == "MultiPolygon"){
-						var mp = new MultiPolygon();
+						var pA = []; //Path Array
 						for (var i = 0; i < geoJSON.features[f].geometry.coordinates.length; i++){
 							var cL = [];
 							for (var j = 0; j < geoJSON.features[f].geometry.coordinates[i][0].length; j++){
 								var myLatLng = new google.maps.LatLng(geoJSON.features[f].geometry.coordinates[i][0][j][1], geoJSON.features[f].geometry.coordinates[i][0][j][0]);
 								cL.push(myLatLng);
 							}
-							mp.addPolygon(cL);
+							pA.push(cL);
 						}
-						that.features.push(mp);
+						that.addMultiPolygon(pA);
 					}
 				}
 			}
