@@ -5,10 +5,9 @@ var Polygon = function Polygon(pL){
 		map: parent.map,
 		strokeWeight: "1.0",
 		fillColor: "#222222",
-		fillOpacity: 0.4
+		fillOpacity: 0.4,
+		paths: this.pointList
 	});
-	this.gMap.setPaths(this.pointList);
-	this.gMap.setMap(parent.map);
 
 }
 Polygon.prototype = {
@@ -35,10 +34,9 @@ var MultiPolygon = function MultiPolygon(pA){
 		map: parent.map,
 		strokeWeight: "1.0",
 		fillColor: "#222222",
-		fillOpacity: 0.4
+		fillOpacity: 0.4,
+		paths: this.pointArray
 	});
-	this.gMap.setPaths(this.pointArray);
-	this.gMap.setMap(parent.map);
 }
 MultiPolygon.prototype = {
 	addPolygon: function addPolygon(points){
