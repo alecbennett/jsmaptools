@@ -1,26 +1,15 @@
 var Polygon = function Polygon(pL){
 	this.pointList = pL;
 	this.type = "Polygon";
-	this.gMap = new google.maps.Polygon({
-		map: parent.map,
-		strokeWeight: "1.0",
-		fillColor: "#222222",
-		fillOpacity: 0.4,
-		paths: this.pointList
-	});
-
+	this.p = new L.Polygon(pL, {weight: '1.0', color: '#000', opacity: '0.9'}).addTo(parent.map);
+	this.p.on('mouseover', function(){ this.setStyle({fillColor: '#ff0066'})});
+	this.p.on('mouseout', function(){ this.setStyle({fillColor: ''})});
 }
 Polygon.prototype = {
 	addPoint: function addPoint(){
 
 	},
 	initialize: function initialize(){
-		google.maps.event.addListener(this.gMap,"mouseover",function(){
-			this.setOptions({fillColor: "#999999"});
-		});
-		google.maps.event.addListener(this.gMap,"mouseout",function(){
-			this.setOptions({fillColor: "#222222"});
-		});
 
 	},
 	getName: function getName(){
@@ -30,13 +19,9 @@ Polygon.prototype = {
 var MultiPolygon = function MultiPolygon(pA){
 	this.pointArray = pA;
 	this.type = "MultiPolygon";
-	this.gMap = new google.maps.Polygon({
-		map: parent.map,
-		strokeWeight: "1.0",
-		fillColor: "#222222",
-		fillOpacity: 0.4,
-		paths: this.pointArray
-	});
+	this.mp = new L.MultiPolygon(pA, {weight: '1.0', color: '#000'}).addTo(parent.map);
+	this.mp.on('mouseover', function(){ this.setStyle({fillColor: '#cc3399'})});
+	this.mp.on('mouseout', function(){ this.setStyle({fillColor: ''})});
 }
 MultiPolygon.prototype = {
 	addPolygon: function addPolygon(points){
@@ -85,7 +70,7 @@ MapTools.prototype = {
 					if (fT == "Polygon"){
 						var cL = [];
 						for (var i = 0; i < geoJSON.features[f].geometry.coordinates[0].length; i++){
-							var myLatLng = new google.maps.LatLng(geoJSON.features[f].geometry.coordinates[0][i][1], geoJSON.features[f].geometry.coordinates[0][i][0]);
+							var myLatLng = new L.LatLng(geoJSON.features[f].geometry.coordinates[0][i][1], geoJSON.features[f].geometry.coordinates[0][i][0]);
 							cL.push(myLatLng);
 						}
 						that.addPolygon(cL);
@@ -95,7 +80,7 @@ MapTools.prototype = {
 						for (var i = 0; i < geoJSON.features[f].geometry.coordinates.length; i++){
 							var cL = [];
 							for (var j = 0; j < geoJSON.features[f].geometry.coordinates[i][0].length; j++){
-								var myLatLng = new google.maps.LatLng(geoJSON.features[f].geometry.coordinates[i][0][j][1], geoJSON.features[f].geometry.coordinates[i][0][j][0]);
+								var myLatLng = new L.LatLng(geoJSON.features[f].geometry.coordinates[i][0][j][1], geoJSON.features[f].geometry.coordinates[i][0][j][0]);
 								cL.push(myLatLng);
 							}
 							pA.push(cL);
