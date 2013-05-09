@@ -83,14 +83,29 @@ MapTools.prototype = {
                                 }
 			}
 		});
+		//min = 5;
+		//max = 8;
 		var diff = max - min;
 		var scale_r = 1 / (diff) * (max_r - min_r);
 		var scale_g = 1 / (diff) * (max_g - min_g);
 		var scale_b = 1 / (diff) * (max_b - min_b);
 		$.each(this.features, function(i,v){
-			var c_r = Math.round(eval("v.properties." + prop) * scale_r + min_r).toString(16);
-			var c_g = Math.round(eval("v.properties." + prop) * scale_g + min_g).toString(16);
-			var c_b = Math.round(eval("v.properties." + prop) * scale_b + min_b).toString(16);
+			var prop_v = eval("v.properties." + prop);
+			/*
+			if (prop_v < min){ 
+				var c_r = min_r.toString(16);
+				var c_g = min_g.toString(16);
+				var c_b = min_b.toString(16);
+			} else if (prop_v > max){
+				var c_r = max_r.toString(16);
+				var c_g = max_g.toString(16);
+				var c_b = max_b.toString(16);
+			} else {
+			*/
+				var c_r = Math.round(prop_v * scale_r + min_r).toString(16); 
+				var c_g = Math.round(prop_v * scale_g + min_g).toString(16);
+				var c_b = Math.round(prop_v * scale_b + min_b).toString(16);
+			//}
 			if (c_r.length < 2){ c_r = "0" + c_r; }
 			if (c_g.length < 2){ c_g = "0" + c_g; }
 			if (c_b.length < 2){ c_b = "0" + c_b; }
