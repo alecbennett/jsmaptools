@@ -63,23 +63,23 @@ MapTools.prototype = {
 	applyChoropleth: function applyChoropleth(prop, lowcolor, highcolor){
 		var min;
 		var max;
-		var min_r = parseInt(lowcolor[1] + lowcolor[2], 16);
-		var max_r = parseInt(highcolor[1] + highcolor[2], 16);
-		var min_g = parseInt(lowcolor[3] + lowcolor[4], 16);
-		var max_g = parseInt(highcolor[3] + highcolor[4], 16);
-		var min_b = parseInt(lowcolor[5] + lowcolor[6], 16);
-		var max_b = parseInt(highcolor[5] + highcolor[6], 16);
-
+		var min_r = parseInt(lowcolor.substring(1,3), 16);
+		var max_r = parseInt(highcolor.substring(1,3), 16);
+		var min_g = parseInt(lowcolor.substring(3,5), 16);
+		var max_g = parseInt(highcolor.substring(3,5), 16);
+		var min_b = parseInt(lowcolor.substring(5,7), 16);
+		var max_b = parseInt(highcolor.substring(5,7), 16);
 		$.each(this.features, function(i,v){
+			var pv = eval("v.properties." + prop);
 			if (i == 0){
-				min = eval("v.properties." + prop);
-				max = eval("v.properties." + prop);
+				min = pv;
+				max = pv;
 			} else {
-				if (eval("v.properties." + prop) < min){
-					min = eval("v.properties." + prop);
+				if (pv < min){
+					min = pv;
 				}
-				if (eval("v.properties." + prop) > max){
-                                        max = eval("v.properties." + prop);
+				if (pv > max){
+                                        max = pv;
                                 }
 			}
 		});
@@ -90,29 +90,27 @@ MapTools.prototype = {
 		var scale_g = 1 / (diff) * (max_g - min_g);
 		var scale_b = 1 / (diff) * (max_b - min_b);
 		$.each(this.features, function(i,v){
-			var prop_v = eval("v.properties." + prop);
+			var pv = eval("v.properties." + prop);
 			/*
-			if (prop_v < min){ 
+			if (pv < min){ 
 				var c_r = min_r.toString(16);
 				var c_g = min_g.toString(16);
 				var c_b = min_b.toString(16);
-			} else if (prop_v > max){
+			} else if (pv > max){
 				var c_r = max_r.toString(16);
 				var c_g = max_g.toString(16);
 				var c_b = max_b.toString(16);
 			} else {
 			*/
-				var c_r = Math.round(prop_v * scale_r + min_r).toString(16); 
-				var c_g = Math.round(prop_v * scale_g + min_g).toString(16);
-				var c_b = Math.round(prop_v * scale_b + min_b).toString(16);
+				var c_r = Math.round(pv * scale_r + min_r).toString(16); 
+				var c_g = Math.round(pv * scale_g + min_g).toString(16);
+				var c_b = Math.round(pv * scale_b + min_b).toString(16);
 			//}
 			if (c_r.length < 2){ c_r = "0" + c_r; }
 			if (c_g.length < 2){ c_g = "0" + c_g; }
 			if (c_b.length < 2){ c_b = "0" + c_b; }
 			var colorString = eval("'#" + c_r + c_g + c_b + "'");
-			v.p.setStyle({ fillColor: colorString });
-			v.p.setStyle({ fillOpacity: '1.00' });
-			v.p.setStyle({ color: '#ffffff' });
+			v.p.setStyle({ fillColor: colorString, fillOpacity: '1.00', color: '#ffffff' });
 			v.p.on('mouseout', function(){ this.setStyle({fillColor:  colorString})});
 		});
 	},
