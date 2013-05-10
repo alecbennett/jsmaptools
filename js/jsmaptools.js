@@ -102,21 +102,21 @@ MapTools.prototype = {
 				var c_b = max_b.toString(16);
 			} else {
 			*/
-				if (scale_r < 0){
-					var c_r = Math.round(max_r - (max - pv) * scale_r).toString(16);
-				} else {
-					var c_r = Math.round((pv - min) * scale_r + min_r).toString(16); 
-				}
-				if (scale_g < 0){
-					var c_g = Math.round(max_g - (max - pv) * scale_g).toString(16);
-				} else {
-					var c_g = Math.round((pv - min) * scale_g + min_g).toString(16);
-				}
-				if (scale_b < 0){
-					var c_b = Math.round(max_b - (max - pv) * scale_b).toString(16);
-				} else {
-					var c_b = Math.round((pv - min) * scale_b + min_b).toString(16);
-				}
+			if (scale_r < 0){
+				var c_r = Math.round(max_r - (max - pv) * scale_r).toString(16);
+			} else {
+				var c_r = Math.round((pv - min) * scale_r + min_r).toString(16); 
+			}
+			if (scale_g < 0){
+				var c_g = Math.round(max_g - (max - pv) * scale_g).toString(16);
+			} else {
+				var c_g = Math.round((pv - min) * scale_g + min_g).toString(16);
+			}
+			if (scale_b < 0){
+				var c_b = Math.round(max_b - (max - pv) * scale_b).toString(16);
+			} else {
+				var c_b = Math.round((pv - min) * scale_b + min_b).toString(16);
+			}
 			//}
 			if (c_r.length < 2){ c_r = "0" + c_r; }
 			if (c_g.length < 2){ c_g = "0" + c_g; }
