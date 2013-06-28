@@ -39,11 +39,27 @@ MultiPolygon.prototype = {
 		var that=this;
 	}
 }
+var Point = function Point(pA, props){
+	this.pointArray = pA;
+	this.type = "Point";
+	this.p = new L.circleMarker(pA, {radius: "4", fillColor: "#cc3366", weight: "1px", color: "#cc3366"}).addTo(map);
+	this.properties = props;
+}
+Point.prototype = {
+	initialize: function initialize(){
+		var that=this;
+	}
+}
 var MapTools = function MapTools(mn) {
 	this.features = new Array();
 	this.map = mn;
 }
 MapTools.prototype = {
+	addPoint: function addPoint(points, propArray){
+		var pointArray = new Point(points, propArray);
+		pointArray.initialize();
+		this.features.push(pointArray);
+	},
 	addPolygon: function addPolygon(points, propArray){
 		var poly = new Polygon(points, propArray);
 		poly.initialize();
@@ -60,6 +76,11 @@ MapTools.prototype = {
 	closePolygon: function closePolygon(){
 
         },
+	colorPolygons: function colorPolygons(color){
+		$.each(this.features, function(i,v){
+			v.p.setStyle({fillColor: color});
+		});
+	},
 	applyChoropleth: function applyChoropleth(prop, lowcolor, highcolor){
 		var min;
 		var max;
@@ -154,6 +175,16 @@ MapTools.prototype = {
 							pA.push(cL);
 						}
 						that.addMultiPolygon(pA, geoJSON.features[f].properties);
+					}
+					if (fT == "MultiPoint"){
+						//var cL = [];
+						for (var i = 0; i < geoJSON.features[f].geometry.coordinates[0].length; i++){
+							var myLatLng = new L.LatLng(geoJSON.features[f].geometry.coordinates[0][1], geoJSON.features[f].geometry.coordinates[0][0]);
+
+							that.addPoint(myLatLng, geoJSON.features[f].properties);
+							//cL.push(myLatLng);
+						}
+						//that.addPoint(cL, geoJSON.features[f].properties);
 					}
 				}
 			}
